@@ -1,0 +1,47 @@
+provider "aws" {
+  access_key = "${var.access_key}"
+  secret_key = "${var.secret_key}"
+  region = "eu-west-1"
+}
+
+resource "aws_instance" "web" {
+  connection {
+    user = "ec2-user"
+    key_file = "~/.ssh/bp.pem"
+  }
+
+  instance_type = "t2.micro"
+  ami = "ami-0fcb4e7c"
+  key_name = "bp"
+  subnet_id = "subnet-5d0feb2b"
+  vpc_security_group_ids = ["${split(",", "sg-3d746159,sg-ce4154aa")}"]
+
+  tags {
+    Name = "web"
+    Env = "Production"
+  }
+
+  lifecycle {
+    create_before_destroy = true
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "echo \"########## Getting chef config ##########\"",
+      "sudo git clone https://github.com/brianpower/sainsburys.git",
+      "sudo mkdir /etc/chef",
+      "sudo cp sainsburys/node.json.web /etc/chef/node.json",
+      "sudo cp sainsburys/Berksfile /etc/chef/",
+      "sudo cp sainsburys/metadata.rb /etc/chef/",
+      "sudo cp sainsburys/client.rb /etc/chef/",
+      "sudo cp sainsburys/chef-update.sh /usr/local/bin/chef-update.sh",
+      "sudo chmod 755 /usr/local/bin/chef-update.sh",
+      "sudo /usr/local/bin/chef-update.sh;sudo /usr/local/bin/chef-client",
+      "echo \"########## Nginx config ##########\"",
+      "sudo cp sainsburys/upstream.conf /etc/nginx/conf.d",
+	    "sudo cp sainsburys/server.conf /etc/nginx/conf.d",
+      "sudo service nginx restart",
+      "echo \"########## Completed ##########\""
+    ]
+  }
+}

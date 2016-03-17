@@ -18,9 +18,9 @@ Set to aws instance (ec2) and requires the connection parameters, instance type,
  security groups to use. Additional I have set some tags for ease of identification and the lifecycle option.
 ### provisioner:
 Enables a remote execution of instructions, this is divided into:
->>Bringing config files across form github
->>Placing Chef config files into place and running it
->>Setting specific applications, nginx for web server and go for the app servers
+>Bringing config files across form github
+>Placing Chef config files into place and running it
+>Setting specific applications, nginx for web server and go for the app servers
 
 ## Chef
 Using the latest version 12.8.1, Chef comprises of files located in /etc/chef. Of these, 2 are most likely to change and can differ from build to build, these are:

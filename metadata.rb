@@ -1,0 +1,7 @@
+name 'base'
+maintainer 'Brian Power'
+maintainer_email 'brian.power@yahoo.co.uk'
+description 'Basic configuration'
+version '1.0.0'
+supports 'amazon'
+depends 'yum'

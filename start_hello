@@ -1,0 +1,5 @@
+#!/bin/bash
+OK=`netstat -auntp | grep ':8484' | grep hello`
+if [ ! "${OK}" ]; then
+  /usr/local/go/bin/hello&
+fi

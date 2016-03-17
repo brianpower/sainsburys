@@ -20,10 +20,12 @@ The is the main configuration file and is broken down into sections:
 
 ## Chef
 Using the latest version 12.8.1, Chef comprises of files located in /etc/chef. Of these, 2 are most likely to change and can differ from build to build, these are:
-### Berksfile   This file enables the cookbooks to be sourced, most commonly from the Supermarket or from a locally maintained
-              git repo. The latter allows for increased control of versions and customised recipes.
-### node.json   This file is responsible for the applications that are to be installed, it reflects the recipes present in
-              the cookbooks and can comprise of customised attributes.
+### Berksfile
+This file enables the cookbooks to be sourced, most commonly from the Supermarket or from a locally maintained
+git repo. The latter allows for increased control of versions and customised recipes.
+### node.json
+This file is responsible for the applications that are to be installed, it reflects the recipes present in
+the cookbooks and can comprise of customised attributes.
               
 ## GIT
 The git repository is my personal one which has a Sainburys repo set up in the public space.

@@ -1,0 +1,9 @@
+{
+  "run_list": [
+    "recipe[nginx]"
+  ],
+  "nginx": {
+    "repo_source": "nginx",
+    "upstream_repository": "http://nginx.org/packages/rhel/6/$basearch/"
+  }
+}
